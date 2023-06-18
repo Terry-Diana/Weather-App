@@ -1,20 +1,18 @@
 * {
-  font-family: "Rimouski";
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-  background-color: #293251;
+  background-color: #dee1f2;
 }
 
 .container {
   width: 300px;
-  background-color: #fff;
-
   display: block;
   margin: 0 auto;
-
   border-radius: 10px;
   padding-bottom: 50px;
+  background-color: #f4f9ff;
 }
 
 .app-title {
@@ -24,24 +22,24 @@ body {
 }
 
 .app-title p {
-  text-align: center;
   padding: 15px;
   margin: 0 auto;
   font-size: 1.2em;
   color: #293251;
+  text-align: center;
 }
 
 .notification {
-  background-color: #f8d7da;
   display: none;
+  background-color: #f4f9ff;
 }
 
 .notification p {
-  color: #721c24;
-  font-size: 1.2em;
   margin: 0;
-  text-align: center;
   padding: 10px 0;
+  color: #dc143c;
+  font-size: 1.2em;
+  text-align: center;
 }
 
 .weather-container {
@@ -66,16 +64,16 @@ body {
 }
 
 .temperature-value p {
-  padding: 0;
   margin: 0;
-  color: #293251;
+  padding: 0;
   font-size: 4em;
-  text-align: center;
   cursor: pointer;
+  color: #293251;
+  text-align: center;
 }
 
 .temperature-value p:hover {
-  color: crimson;
+  color: #dc143c;
 }
 
 .temperature-value span {
@@ -84,20 +82,20 @@ body {
 }
 
 .temperature-value span:hover {
-  color: crimson;
+  color: #dc143c;
 }
 
 .temperature-description {
-  text-align: center;
   padding: 5px;
+  text-align: center;
 }
 
 .temperature-description p {
-  padding: 8px;
   margin: 0;
+  padding: 8px;
   color: #293251;
-  text-align: center;
   font-size: 1.2em;
+  text-align: center;
 }
 
 .location {
@@ -108,6 +106,6 @@ body {
   margin: 0;
   padding: 0;
   color: #293251;
-  text-align: center;
   font-size: 0.8em;
+  text-align: center;
 }
