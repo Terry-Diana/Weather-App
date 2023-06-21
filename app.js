@@ -10,18 +10,17 @@ const weather = {
   },
 };
 
-const KELVIN = 273;
+const kelvin = 273;
 const key = '82005d27a116c2880c8f0fcb866998a0';
 
-'geolocation' in navigator
-  ? navigator.geolocation.getCurrentPosition(setPosition, showError)
-  : (notificationElement.style.display = 'block');
-notificationElement.innerHTML = '<p>Browser does not support Geolocation</p>';
+if ('geolocation' in navigator) {
+  navigator.geolocation.getCurrentPosition(setPosition, showError);
+} else {
+  displayError('Browser does not support Geolocation');
+}
 
 function setPosition(position) {
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
-
+  const { latitude, longitude } = position.coords;
   getWeather(latitude, longitude);
 }
 
@@ -30,12 +29,12 @@ function showError(error) {
   notificationElement.innerHTML = `<p>${error.message}</p>`;
 }
 
-const getWeather = (latitude, longitude) => {
-  let api = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`;
+function getWeather(latitude, longitude) {
+  const api = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${key}`;
 
   fetch(api)
     .then(function (response) {
-      let data = response.json();
+      const data = response.json();
       return data;
     })
     .then(function (data) {
@@ -43,27 +42,29 @@ const getWeather = (latitude, longitude) => {
       weather.country = data.sys.country;
       weather.iconId = data.weather[0].icon;
       weather.description = data.weather[0].description;
-      weather.temperature.value = Math.floor(data.main.temp - KELVIN);
+      weather.temperature.value = Math.floor(data.main.temp -kelvin);
     })
     .then(function () {
       displayWeather();
     });
 };
 
-const displayWeather = () => {
+function displayWeather () {
   iconElement.innerHTML = `<img src="icons/${weather.iconId}.png" />`;
   tempElement.innerHTML = `${weather.temperature.value}°<span>C</span>`;
   descElement.innerHTML = weather.description;
   locationElement.innerHTML = `${weather.city}, ${weather.country}`;
 };
 
-const celsiusToFahrenheit = (temperature) => (temperature * 9) / 5 + 32;
+function celsiusToFahrenheit(temperature) {
+  (temperature * 9) / 5 + 32;
+}
 
 tempElement.addEventListener('click', function () {
   if (weather.temperature.value === undefined) return;
 
-  if (weather.temperature.unit == 'celsius') {
-    let fahrenheit = celsiusToFahrenheit(weather.temperature.value);
+  if (weather.temperature.unit === 'celsius') {
+    const fahrenheit = celsiusToFahrenheit(weather.temperature.value);
     fahrenheit = Math.floor(fahrenheit);
 
     tempElement.innerHTML = `${fahrenheit}°<span>F</span>`;
